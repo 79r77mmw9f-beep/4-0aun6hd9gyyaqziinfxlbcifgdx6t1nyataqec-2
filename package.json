@@ -1,0 +1,15 @@
+{
+  "name": "living-city",
+  "version": "0.1.0",
+  "description": "LIVING CITY - 2D Top-Down Urban Sandbox Game",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/**/*.test.js",
+    "test:unit": "node --test tests/unit/*.test.js",
+    "test:integration": "node --test tests/integration/*.test.js"
+  },
+  "keywords": ["game", "2d", "top-down", "sandbox", "urban"],
+  "author": "Antigravity Engineering Agent",
+  "license": "MIT"
+}
