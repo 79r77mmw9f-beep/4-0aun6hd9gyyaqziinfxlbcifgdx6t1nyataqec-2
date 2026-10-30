@@ -30,8 +30,8 @@ export class DevDossier {
         <div class="dossier-grid">
           <div class="dossier-panel">
             <h3>🏗️ PROJECT METRICS</h3>
-            <div class="metric-row"><span>Current Phase:</span> <b class="badge-accent">PHASE 1 (FIRST PLAYABLE)</b></div>
-            <div class="metric-row"><span>Phase 0 Status:</span> <b class="badge-success">COMPLETE (PASS)</b></div>
+            <div class="metric-row"><span>Current Phase:</span> <b class="badge-accent">PHASE 2 (ART & DISTRICTS)</b></div>
+            <div class="metric-row"><span>Phase 1 Status:</span> <b class="badge-success">COMPLETE (PASS)</b></div>
             <div class="metric-row"><span>Engine Runtime:</span> <b>HTML5 Canvas 2D + ES Modules</b></div>
             <div class="metric-row"><span>Fixed Timestep:</span> <b>60 Hz (16.67ms)</b></div>
             <div class="metric-row"><span>Automated Tests:</span> <b class="badge-success" id="dossier-tests">ALL PASSING (Unit & Integration)</b></div>
@@ -47,7 +47,8 @@ export class DevDossier {
               <li><span class="dot-green"></span> <b>PlayerController:</b> 8-way diagonal-normalized physics</li>
               <li><span class="dot-green"></span> <b>Camera2D:</b> Exponential lerp with world clamping</li>
               <li><span class="dot-green"></span> <b>SurpriseWindow:</b> Phase 1 narrative ambient seed</li>
-              <li><span class="dot-green"></span> <b>PauseMenu:</b> Scene state management & reset</li>
+              <li><span class="dot-green"></span> <b>StatefulProps:</b> Phase 2 memory-preserving props</li>
+              <li><span class="dot-green"></span> <b>CanopyOcclusion:</b> Store awning fade under player</li>
             </ul>
           </div>
         </div>
