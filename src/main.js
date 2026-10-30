@@ -74,6 +74,11 @@ class Game {
     this.input.onDossierToggle = () => {
       this.devDossier.toggle();
     };
+
+    this.input.onInteract = () => {
+      if (this.clock.isPaused()) return;
+      this.world.handleInteraction();
+    };
   }
 
   setupWindowResize() {
