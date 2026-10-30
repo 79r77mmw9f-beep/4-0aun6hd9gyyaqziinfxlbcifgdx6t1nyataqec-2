@@ -52,9 +52,9 @@ test('CollisionSystem: horizontal wall sliding mechanics (diagonal into horizont
   const tileMap = new TileMap();
   const collision = new CollisionSystem(tileMap);
 
-  // Northwest building bottom edge is at Y: 320 (Row 9).
-  // Position player just below at Y: 332, moving diagonally right and up into the wall
-  const startPos = new Vector2(100, 332);
+  // Residential building bottom edge is at Y: 320 (Row 9, Cols 12 to 21).
+  // Position player at X: 480, Y: 332, moving diagonally right and up into the wall
+  const startPos = new Vector2(480, 332);
   const velocity = new Vector2(120, -120); // right and up
   const boxSize = { width: 20, height: 20 };
   const delta = 0.05;
