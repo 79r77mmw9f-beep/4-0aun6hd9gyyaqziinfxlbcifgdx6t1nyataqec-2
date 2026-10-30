@@ -4,6 +4,7 @@
   "description": "LIVING CITY - 2D Top-Down Urban Sandbox Game",
   "main": "src/main.js",
   "type": "module",
+  "scripts": {
     "build": "mkdir -p dist && cp -r index.html style.css src dist/",
     "test": "node --test tests/**/*.test.js",
     "test:unit": "node --test tests/unit/*.test.js",

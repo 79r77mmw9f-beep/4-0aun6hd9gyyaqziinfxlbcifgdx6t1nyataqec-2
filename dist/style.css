@@ -1,0 +1,396 @@
+/* LIVING CITY - Urban Noir Stylesheet */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #0d0f14;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #eceff4;
+}
+
+#app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#game-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  background-color: #101216;
+}
+
+/* --- HUD (Top Bar) --- */
+.game-hud {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(18, 22, 30, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(136, 192, 208, 0.25);
+  border-radius: 8px;
+  padding: 8px 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.hud-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.hud-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hud-title {
+  font-weight: 900;
+  letter-spacing: 2px;
+  font-size: 16px;
+  color: #00e5ff;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.hud-badge {
+  font-size: 10px;
+  background: rgba(136, 192, 208, 0.2);
+  color: #88c0d0;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  border: 1px solid rgba(136, 192, 208, 0.3);
+}
+
+.hud-stats {
+  display: flex;
+  gap: 14px;
+  font-family: "SF Mono", "Fira Code", Monaco, Consolas, monospace;
+  font-size: 12px;
+  color: #d8dee9;
+}
+
+.stat-item b {
+  color: #88c0d0;
+}
+
+.hud-right {
+  display: flex;
+  gap: 8px;
+}
+
+.hud-btn {
+  background: #2e3440;
+  color: #eceff4;
+  border: 1px solid #434c5e;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.hud-btn:hover {
+  background: #3b4252;
+  border-color: #88c0d0;
+}
+
+.hud-btn-accent {
+  background: rgba(136, 192, 208, 0.15);
+  color: #88c0d0;
+  border-color: rgba(136, 192, 208, 0.4);
+}
+
+.hud-btn-accent:hover {
+  background: rgba(136, 192, 208, 0.3);
+  box-shadow: 0 0 8px rgba(136, 192, 208, 0.4);
+}
+
+.hud-btn-danger {
+  background: rgba(191, 97, 106, 0.15);
+  color: #bf616a;
+  border-color: rgba(191, 97, 106, 0.3);
+}
+
+.hud-btn-danger:hover {
+  background: rgba(191, 97, 106, 0.3);
+}
+
+/* --- OVERLAYS & MODALS --- */
+.hidden {
+  display: none !important;
+}
+
+.pause-overlay, .dossier-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 12, 16, 0.78);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.pause-card, .dossier-card {
+  background: #181c24;
+  border: 1px solid #3b4252;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 229, 255, 0.1);
+  max-width: 580px;
+  width: 90%;
+  color: #eceff4;
+}
+
+.dossier-card {
+  max-width: 760px;
+}
+
+.pause-header, .dossier-header {
+  border-bottom: 1px solid #2e3440;
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.pause-header h2, .dossier-header h2 {
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: #00e5ff;
+}
+
+.pause-sub, .dossier-sub {
+  font-size: 12px;
+  color: #7b88a1;
+  margin-top: 4px;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  color: #d8dee9;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+.btn-close:hover {
+  color: #bf616a;
+}
+
+.pause-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.btn-primary {
+  flex: 1;
+  background: #00e5ff;
+  color: #0f141c;
+  font-weight: 800;
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+}
+
+.btn-primary:hover {
+  background: #33ebff;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  flex: 1;
+  background: #2e3440;
+  color: #eceff4;
+  font-weight: 700;
+  border: 1px solid #434c5e;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-secondary:hover {
+  background: #3b4252;
+  border-color: #88c0d0;
+}
+
+.pause-section {
+  background: #1e232d;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 16px;
+  border: 1px solid #2b3240;
+}
+
+.pause-section h3, .dossier-panel h3, .dossier-live-metrics h3 {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: #88c0d0;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.controls-grid {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.ctrl-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  padding-bottom: 4px;
+}
+
+.ctrl-row b {
+  color: #e5b839;
+  font-family: monospace;
+}
+
+.criteria-list {
+  list-style: none;
+  font-size: 12px;
+  display: grid;
+  gap: 6px;
+  color: #a3be8c;
+}
+
+/* --- DOSSIER PANEL STYLES --- */
+.dossier-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.dossier-panel {
+  background: #1e232d;
+  border: 1px solid #2b3240;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.badge-success {
+  background: rgba(163, 190, 140, 0.2);
+  color: #a3be8c;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+}
+
+.badge-accent {
+  background: rgba(0, 229, 255, 0.15);
+  color: #00e5ff;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+}
+
+.system-list {
+  list-style: none;
+  font-size: 12px;
+  display: grid;
+  gap: 6px;
+}
+
+.dot-green {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #a3be8c;
+  margin-right: 6px;
+  box-shadow: 0 0 6px #a3be8c;
+}
+
+.dossier-live-metrics {
+  background: #14171f;
+  border: 1px solid #282f3d;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.live-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+.live-metrics-row b {
+  color: #e5b839;
+}
+
+.dossier-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: #7b88a1;
+  border-top: 1px solid #2e3440;
+  padding-top: 14px;
+}
+
+@media (max-width: 680px) {
+  .hud-stats {
+    display: none;
+  }
+  .dossier-grid {
+    grid-template-columns: 1fr;
+  }
+  .live-metrics-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
