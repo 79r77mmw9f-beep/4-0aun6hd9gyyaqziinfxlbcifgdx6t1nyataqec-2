@@ -1,6 +1,6 @@
 /**
  * LIVING CITY - Input Handler
- * Captures keyboard inputs (WASD, Arrows, Shift, ESC, ~, R) and on-screen touch controls.
+ * Captures keyboard inputs (WASD, Arrows, Shift, ESC, ~, R, E) and on-screen touch controls.
  */
 
 import { Vector2 } from '../core/Vector2.js';
@@ -19,6 +19,7 @@ export class InputHandler {
     this.onPauseToggle = null;
     this.onDossierToggle = null;
     this.onRestart = null;
+    this.onInteract = null;
 
     this.setupListeners();
   }
@@ -44,8 +45,8 @@ export class InputHandler {
         if (this.onDossierToggle) this.onDossierToggle();
       }
 
-      if (e.code === 'KeyR' && e.ctrlKey === false && e.metaKey === false) {
-        // Optional quick restart (can be triggered from pause menu too)
+      if (e.code === 'KeyE') {
+        if (this.onInteract) this.onInteract();
       }
     });
 
