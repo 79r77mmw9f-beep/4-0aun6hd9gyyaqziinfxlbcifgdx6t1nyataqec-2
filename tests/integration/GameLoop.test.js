@@ -11,21 +11,14 @@ test('Integration: full simulation game loop execution (60 ticks)', () => {
   const startPos = world.player.position.clone();
   let ticksRun = 0;
 
-  // Simulate 1 second (1000ms) with rightward movement
-  const simulatedTime = 1000;
+  // Simulate 60 frames (~1000ms) with rightward movement
   clock.lastTime = 0;
-
-  // Tick 1
-  clock.update(16, (delta) => {
-    world.update(new Vector2(1, 0), false, delta);
-    ticksRun += 1;
-  });
-
-  // Advance time to 1000ms
-  clock.update(1000, (delta) => {
-    world.update(new Vector2(1, 0), false, delta);
-    ticksRun += 1;
-  });
+  for (let frame = 1; frame <= 60; frame++) {
+    clock.update(frame * 16.6667, (delta) => {
+      world.update(new Vector2(1, 0), false, delta);
+      ticksRun += 1;
+    });
+  }
 
   assert.ok(ticksRun >= 58, `should have executed ~60 fixed ticks (executed: ${ticksRun})`);
   assert.ok(world.player.position.x > startPos.x, 'player should have advanced to the right');

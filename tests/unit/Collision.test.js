@@ -23,7 +23,7 @@ test('CollisionSystem: obstacle blocking along movement axis', () => {
   const startPos = new Vector2(236, 150);
   const velocity = new Vector2(-150, 0); // moving left
   const boxSize = { width: 20, height: 20 };
-  const delta = 0.1; // would move 15px left to X: 221 (penetrating building edge at X: 224)
+  const delta = 0.1;
 
   const res = collision.resolveMovement(startPos, velocity, boxSize, delta);
 
@@ -31,7 +31,7 @@ test('CollisionSystem: obstacle blocking along movement axis', () => {
   assert.ok(res.position.x >= 224 + 10, 'player should be stopped outside obstacle right edge');
 });
 
-test('CollisionSystem: wall sliding mechanics (diagonal into wall)', () => {
+test('CollisionSystem: vertical wall sliding mechanics (diagonal into vertical wall)', () => {
   const tileMap = new TileMap();
   const collision = new CollisionSystem(tileMap);
 
@@ -46,6 +46,24 @@ test('CollisionSystem: wall sliding mechanics (diagonal into wall)', () => {
   assert.ok(res.collidedX, 'X movement should collide and stop');
   assert.equal(res.collidedY, false, 'Y movement should continue freely sliding');
   assert.ok(res.position.y > startPos.y, 'player must slide downwards along the wall');
+});
+
+test('CollisionSystem: horizontal wall sliding mechanics (diagonal into horizontal wall)', () => {
+  const tileMap = new TileMap();
+  const collision = new CollisionSystem(tileMap);
+
+  // Northwest building bottom edge is at Y: 320 (Row 9).
+  // Position player just below at Y: 332, moving diagonally right and up into the wall
+  const startPos = new Vector2(100, 332);
+  const velocity = new Vector2(120, -120); // right and up
+  const boxSize = { width: 20, height: 20 };
+  const delta = 0.05;
+
+  const res = collision.resolveMovement(startPos, velocity, boxSize, delta);
+
+  assert.ok(res.collidedY, 'Y movement should collide with bottom of building');
+  assert.equal(res.collidedX, false, 'X movement should continue freely sliding right');
+  assert.ok(res.position.x > startPos.x, 'player must slide rightwards along the horizontal wall');
 });
 
 test('CollisionSystem: perimeter world boundaries', () => {
