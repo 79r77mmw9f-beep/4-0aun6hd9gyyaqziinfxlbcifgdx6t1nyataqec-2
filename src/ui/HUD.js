@@ -26,7 +26,7 @@ export class HUD {
       <div class="hud-left">
         <div class="hud-brand">
           <span class="hud-title">LIVING CITY</span>
-          <span class="hud-badge">PHASE 1 - FIRST PLAYABLE</span>
+          <span class="hud-badge">PHASE 2 - ART & DISTRICTS</span>
         </div>
         <div class="hud-stats">
           <span class="stat-item">POS: <b id="hud-pos">X: 0, Y: 0</b></span>
